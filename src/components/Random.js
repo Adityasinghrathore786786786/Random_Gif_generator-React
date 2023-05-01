@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "./Spinner";
 
 //here we take our api from env file
 const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
 
 const Random = () => {
   const [gif, setGif] = useState('');
+  const [loading, setLoading] = useState(false);
 
   //   api call
 
   async function fetchData() {
+    setLoading(true);
     const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
     const {data} = await axios.get(url);
-    // console.log(data)
+    console.log(data)
     const imageSource = data.data.images.downsized_large.url;
 
     //console.log(imageSource)
     setGif(imageSource);
+    setLoading(false);
   }
 
   useEffect( () => {
@@ -34,8 +38,11 @@ const Random = () => {
     flex flex-col items-center gap-y-5 mt-[15px]"
     >
       <h1 className="text-2xl underline uppercase font-bold mt-[15px]">A Random Gif</h1>
+      {
+        loading ? (<Spinner></Spinner>):(<img src={gif} alt="randomGif" width="450" />)
+      }
 
-      <img src={gif} alt="randomGif" width="450" />
+      
 
       <button
         onClick={clickHandler}
