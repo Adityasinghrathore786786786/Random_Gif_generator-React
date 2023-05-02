@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
 import Spinner from "./Spinner";
 import useGif from "../hooks/useGif";
 
 //here we take our api from env file
-const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
+//const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
 
 const Random = () => {
 //   const [gif, setGif] = useState('');
